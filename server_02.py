@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# server_01.py
+# server_02.py
 # David Prager Branner
 # 20140525
 
@@ -24,7 +24,7 @@ directories.  (Bonus:  What's the security flaw here?)
 
 Usage:
 
-    python server_01.py 1234
+    python server_02.py 1234
 
 where 1234 is a port to listen on. If no port is found, the default is 8000.
 """
