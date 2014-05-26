@@ -34,7 +34,7 @@
 
  1.  Examples of actual functionality appear immediately below.
 
-### Results tested for
+### Results tested for (manually)
 
  1. 
 
@@ -99,6 +99,7 @@
 
  1. Method `url_is_func()` assumes that there are no default arguments in the function supplied, when arguments are being counted. This could be wrong. We should use more of the information from `inspect.getfullargspec` in populating `functions.Functions.funcs`.
  1. Are we handling `http://localhost:1234/two_arg/1/2` and `http://localhost:1234/two_arg/1/2/` the same?
+ 1. Test suite. An HTTP client would be useful for this.
 
 ### Background of this project
 
