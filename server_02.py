@@ -80,8 +80,6 @@ if found there, run it as a function.
 
     def convert_from_unixtime(self, unixtime):
         """Convert Unix time to human-readable string."""
-        date = datetime.datetime.fromtimestamp(
-            unixtime).strftime('%Y-%m-%d %H:%M')
         return date
 
 
@@ -91,7 +89,9 @@ if found there, run it as a function.
         return 'Hello world!'
 
     def time(self):
-        return self.convert_from_unixtime(time.time())
+        date = datetime.datetime.fromtimestamp(
+            time.time()).strftime('%Y-%m-%d %H:%M')
+        return date
 
     #########################
 
