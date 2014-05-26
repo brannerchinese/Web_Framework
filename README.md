@@ -39,11 +39,11 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
     http://localhost:1234/subdir/file.html
 
-   Returns: The contents of file `subdir/file.html`.
+   Returns: The contents of file `file.html` in subdirectory `subdir`.
 
     http://localhost:1234/subdir/
 
-   Returns: Program error message: `Path must end with ".html"; try again.` Assumes a subdirectory was meant but did not find a filename to search for in that subdirectory.
+   Returns: Program error message: `Path must end with ".html"; try again.` Assumes a subdirectory was meant but did not find a filename to search for in that subdirectory and did not reveal anything about the content of that subdirectory.
 
     http://localhost:1234/subdir.html
 
@@ -58,11 +58,11 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
     http://localhost:1234/one_arg/temperature
 
-   Returns: Calls a function naming "temperature" as the argument.
+   Returns: Calls a function `one_arg(arg)` naming "temperature" as the argument.
 
     http://localhost:1234/two_arg/1/2
 
-   Returns: Calls a function adding the two integer arguments following the function name.
+   Returns: Calls a function `two_arg(arg1, arg2)` adding the two integer arguments following the function name.
 
     http://localhost:1234/two_arg/1/2/4
 
