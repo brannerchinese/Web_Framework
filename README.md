@@ -6,6 +6,6 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
         python server_01.py 1234
 
-   where 1234 is a port to listen on. If no port is found, the default is 8000.
+   where 1234 is a port to listen on. If no port is found, the default is 1924.
 
 [end]

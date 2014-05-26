@@ -7,48 +7,54 @@
 
 Assignments:
 
- 1.     Using your language's http library, make a server that listens on a
-certain port (say 1924) and returns a string of text.  Check that your browser
-displays that text when you go to localhost:1924.
+ Part 2:
 
- 2.  Instead of fixed text, have your program look for a file called index.html
-in its current directory.  Return its contents, or a 404 error if the file
-doesn't exist.
+ 1. Without destroying any of the previous functionality, define a special url that returns the result of a function.  For example, define a function called helloworld, and make it so going to localhost:1924/hello.html calls that function instead of looking for a file.
 
- 3.  Read the url the browser sends and serve the appropriate file - for
-example, localhost:1924/foo.html should look for foo.html in the current
-directory.
+ 2. Keep a list or hash table of these special urls, and the function associated with each.  Check each incoming url to see if it's in the table before looking for a file.
 
- 4. Now handle things like localhost:1924/foo/bar/baz.html by searching through
-directories.  (Bonus:  What's the security flaw here?)
+ 3. Parse the url, so that part of it determines what function gets called, and another part defines the argument(s) to the function - for example, localhost:1924/user/blarg could return information about the user named Blarg.
+
+ 4. Turn your framework into a module or library, so someone can import it into their program.  Tell them how to write a function and associate it with a url.
 
 Usage:
 
     python server_02.py 1234
 
-where 1234 is a port to listen on. If no port is found, the default is 8000.
+where 1234 is a port to listen on. If no port is found, the default is 1924.
 """
 
 import sys
 if sys.version_info[0] != 3:
     print('Python 3 required.')
     sys.exit()
-import os
 import argparse
+import string
+import ast
+import datetime
+import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 class CustomHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        try:
+            self.special
+        except Exception:
+            self.special = ['hello', 'time']
         self.send_response(200)
         self.send_header('Content-type', 'text-html')
         self.end_headers()
-        files = 'files/'
+        self.files = 'files/'
         file_contents = None
+        # Special case: no path given.
         if self.path == '/':
             self.path = 'index.html'
+        # Special case: URL (stripped of .html) is function name.
+        self.zero_arg_urls()
+        # Special case: Not a function, but path is HTML file.
         if self.path.endswith('.html'):
             try:
-                with open (files + self.path, 'rb') as f:
+                with open (self.files + self.path, 'rb') as f:
                     file_contents = f.read()
             except IOError:
                 self.send_error(404, 'File {} not found'.format(self.path))
@@ -57,6 +63,37 @@ class CustomHandler(BaseHTTPRequestHandler):
         if file_contents:
             # self.wfile is a socket.SocketIO object
             self.wfile.write(file_contents)
+
+    def zero_arg_urls(self):
+        """If path, less '.html' is a valid function name, check self.special;
+
+if found there, run it as a function.
+        """
+        fn_name = self.path.lstrip('/').split('/')[0].split('.')[0]
+        if (fn_name[0] in string.ascii_letters and
+                any([i in string.ascii_letters + string.digits + '_' for
+                    i in fn_name]) and
+                fn_name in self.special):
+            content = eval('self.' + fn_name + '()')
+            with open(self.files + fn_name + '.html', 'w') as f:
+                f.write(content)
+
+    def convert_from_unixtime(self, unixtime):
+        """Convert Unix time to human-readable string."""
+        date = datetime.datetime.fromtimestamp(
+            unixtime).strftime('%Y-%m-%d %H:%M')
+        return date
+
+
+    #########################
+    # Add new functions here and then add their names to self.special, above.
+    def hello(self):
+        return 'Hello world!'
+
+    def time(self):
+        return self.convert_from_unixtime(time.time())
+
+    #########################
 
 def run(port):
     print('Server starting on port {}.'.format(port))
@@ -76,5 +113,5 @@ if __name__ == '__main__':
     if args.port:
         port = args.port
     else:
-        port = 8000
+        port = 1924
     run(port)

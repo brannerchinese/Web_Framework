@@ -7,6 +7,8 @@
 
 Assignments:
 
+ Part 1:
+
  1.     Using your language's http library, make a server that listens on a
 certain port (say 1924) and returns a string of text.  Check that your browser
 displays that text when you go to localhost:1924.
@@ -26,7 +28,7 @@ Usage:
 
     python server_01.py 1234
 
-where 1234 is a port to listen on. If no port is found, the default is 8000.
+where 1234 is a port to listen on. If no port is found, the default is 1924.
 """
 
 import sys
@@ -76,5 +78,5 @@ if __name__ == '__main__':
     if args.port:
         port = args.port
     else:
-        port = 8000
+        port = 1924
     run(port)
