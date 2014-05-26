@@ -66,7 +66,7 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
         http://localhost:1234/shellfish.html
         http://localhost:1234/macguffin.html
 
-   Returns: Each of these calls a zero-argument function. Some were added during the running of the server and the server became aware of them.
+   Returns: Each of these calls the zero-argument function named (before `.html`). Some of these were added during the running of the server and the server became aware of them without having to be restarted.
 
  1. 
 
@@ -84,7 +84,7 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
         http://localhost:1234/two_arg/1/2/4
 
-   Returns: Reports exception due to the wrong number of arguments for the function.
+   Returns: Reports exception due to the wrong number of arguments for the function `two_arg()`.
 
 
 ### Things to improve later
