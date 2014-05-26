@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # server.py
 # David Prager Branner
-# 20140525
+# 20140526, works.
 
 """Construct simple web server. See the README for details."""
 

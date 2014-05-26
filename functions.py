@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # functions.py
 # David Prager Branner
-# 20140525
+# 20140526
 
 """Add functions to this class for use with the simple web server."""
 
 import datetime
 import time
-import re
 import inspect
 
 class Functions():
