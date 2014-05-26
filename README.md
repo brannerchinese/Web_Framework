@@ -99,4 +99,8 @@
 
  1. Method `url_is_func()` assumes that there are no default arguments in the function supplied, when arguments are being counted. This could be wrong. We should use more of the information from `inspect.getfullargspec` in populating `functions.Functions.funcs`.
 
+### Background of this project
+
+This program was written in one day (20140525) as an exercise in the [Iron Forger](https://hackpad.com/Iron-Forger-kEmauANGcV5) series of Hacker School. The submitted code is tagged [`as_submitted`](https://github.com/brannerchinese/web_framework/tree/as_submitted). Interim versions of the program are in the directory `old_versions/`.
+
 [end]
