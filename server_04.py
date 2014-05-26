@@ -80,7 +80,7 @@ with subsequent elements as arguments.
         pass
 
     def zero_arg_urls(self):
-        """If path, less '.html', is a valid function name, 
+        """If path, less '.html', is a valid function name,
 
 then check functions.Functions; if found there, run it as a function.
         """
@@ -90,9 +90,15 @@ then check functions.Functions; if found there, run it as a function.
                 any([i in string.ascii_letters + string.digits + '_' for
                     i in fn_name]) and
                 fn_name in F.funcs):
-            content = eval('F.' + fn_name + '()')
-            with open(self.files + fn_name + '.html', 'w') as f:
-                f.write(content)
+            if F.funcs[fn_name]:
+                # Note that this does not take default arguments into account.
+                content = ('''Function {} takes {} arguments; '''
+                        '''you have supplied none.'''.
+                        format(fn_name, F.funcs[fn_name]))
+            else:
+                content = eval('F.' + fn_name + '()')
+                with open(self.files + fn_name + '.html', 'w') as f:
+                    f.write(content)
 
 def run(port):
     print('Server starting on port {}.'.format(port))

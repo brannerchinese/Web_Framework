@@ -18,6 +18,10 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
    the function `time()` will be run; it returns current Unix time formatted for human readability, and this value is saved to an actual file `time.html` which is then served as the response to the original request.
 
+### Things to improve later
+
+ 1. Method `zero_arg_urls()` assumes that there are no default arguments in the function supplied. This could be wrong. We should use more of the information from `inspect.getfullargspec` in populating `functions.Functions.funcs`.
+
 
 ### Superseded
 
