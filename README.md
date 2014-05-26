@@ -43,7 +43,9 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
  - http://localhost:1234/subdir/
 
-        > Program error message: `Path must end with ".html"; try again.` Assumes a subdirectory was meant but did not find a filename to search for in that subdirectory.
+        > Program error message: `Path must end with ".html"; try again.` 
+        > Assumes a subdirectory was meant but did not find a filename to 
+        > search for in that subdirectory.
 
  - http://localhost:1234/subdir.html
 
@@ -54,7 +56,9 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
  - http://localhost:1234/shellfish.html
  - http://localhost:1234/macguffin.html
 
-        > Each of these calls a zero-argument function. Some were added during the running of the server and the server became aware of them.
+        > Each of these calls a zero-argument function. Some were added 
+        > during the running of the server and the server became aware of 
+        > them.
 
  - http://localhost:1234/one_arg/temperature
 
@@ -62,11 +66,13 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
  - http://localhost:1234/two_arg/1/2
 
-        > Calls a function adding the two integer arguments following the function name.
+        > Calls a function adding the two integer arguments following the 
+        > function name.
 
  - http://localhost:1234/two_arg/1/2/4
 
-        > Reports exception due to the wrong number of arguments for the function.
+        > Reports exception due to the wrong number of arguments for the >
+        > function.
 
 
 ### Things to improve later
@@ -74,7 +80,9 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
  1. Method `zero_arg_urls()` assumes that there are no default arguments in the function supplied. This could be wrong. We should use more of the information from `inspect.getfullargspec` in populating `functions.Functions.funcs`.
 
 
-### Superseded
+### Superseded versions 
+
+These old versions, representing intermediate stages in the project, are found in `old_versions/` and are of little interest except to me.
 
  * Part 1: `server_01.py`. Works. 
 
