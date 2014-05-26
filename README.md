@@ -24,7 +24,7 @@
 
         http://localhost:1234/time.html
 
-   the function `time()` will be run; it returns current Unix time formatted for human readability, and this value is saved to an actual file `time.html` which is then served as the response to the original request.
+   the function `functions.Functions.time()` will be run; it returns current Unix time formatted for human readability, and this value is saved to an actual file `time.html` which is then served as the response to the original request.
 
  1.  If a function has arguments, those arguments appear delimited by slashes. For example,
 
