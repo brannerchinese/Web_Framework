@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# server_02.py
+# server_03.py
 # David Prager Branner
 # 20140525
 
@@ -30,10 +30,9 @@ if sys.version_info[0] != 3:
     sys.exit()
 import argparse
 import string
-import ast
-import datetime
-import time
+import imp
 from http.server import HTTPServer, BaseHTTPRequestHandler
+import functions
 
 class CustomHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -65,30 +64,21 @@ class CustomHandler(BaseHTTPRequestHandler):
             self.wfile.write(file_contents)
 
     def zero_arg_urls(self):
-        """If path, less '.html' is a valid function name, check self.special;
+        """If path, less '.html' is a valid function name, 
 
-if found there, run it as a function.
+then check functions.Functions; if found there, run it as a function.
         """
+        imp.reload(functions)
+        F = functions.Functions()
         fn_name = self.path.lstrip('/').split('/')[0].split('.')[0]
         if (fn_name[0] in string.ascii_letters and
                 any([i in string.ascii_letters + string.digits + '_' for
                     i in fn_name]) and
-                fn_name in self.special):
-            content = eval('self.' + fn_name + '()')
+                fn_name in F.funcs):
+#                fn_name in self.special):
+            content = eval('F.' + fn_name + '()')
             with open(self.files + fn_name + '.html', 'w') as f:
                 f.write(content)
-
-    #########################
-    # Add new functions here and then add their names to self.special, above.
-    def hello(self):
-        return 'Hello world!'
-
-    def time(self):
-        date = datetime.datetime.fromtimestamp(
-            time.time()).strftime('%Y-%m-%d %H:%M')
-        return date
-
-    #########################
 
 def run(port):
     print('Server starting on port {}.'.format(port))
