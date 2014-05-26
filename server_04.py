@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# server_03.py
+# server_04.py
 # David Prager Branner
 # 20140525
 
@@ -19,7 +19,7 @@ Assignments:
 
 Usage:
 
-    python server_03.py 1234
+    python server_04.py 1234
 
 where 1234 is a port to listen on. If no port is found, the default is 1924.
 """
@@ -51,6 +51,8 @@ class CustomHandler(BaseHTTPRequestHandler):
         # Special case: path (stripped of .html) is function name.
         imp.reload(functions)
         self.zero_arg_urls()
+        # Special case: path (stripped of .html) is function and argument.
+        self.multi_arg_urls()
         # Special case: Not a function, but path is HTML file.
         if self.path.endswith('.html'):
             try:
@@ -64,8 +66,21 @@ class CustomHandler(BaseHTTPRequestHandler):
             # self.wfile is a socket.SocketIO object
             self.wfile.write(file_contents)
 
+    def self.multi_arg_urls(self):
+        """If left-most element of path, less '.html', is a valid function name,
+
+then check functions.Functions; if found there, run it as a function,
+
+with subsequent elements as arguments.
+        """
+        F = functions.Functions()
+        path = self.path.lstrip('/')
+        if '/' not in path:
+            return
+        pass
+
     def zero_arg_urls(self):
-        """If path, less '.html' is a valid function name, 
+        """If path, less '.html', is a valid function name, 
 
 then check functions.Functions; if found there, run it as a function.
         """
