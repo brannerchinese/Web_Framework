@@ -1,6 +1,11 @@
 ## Simple Web Framework
 
-Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY. Construct an HTTP server and add functionality to allow it to implement a simple web framework.
+[Assignment](https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY): Construct an HTTP server and add functionality to allow it to implement a simple web framework. It should:
+
+ * serve named files in the top level directory or in named subdirectories
+ * return a 404 error when appropriate
+ * try interpreting `name.html` as a zero-argument function `name()`, calling `name()` and returning its output
+ * try interpreting `name/arg` or `name/arg1/arg2...` as a function `name()` with some number of arguments, calling name on those arguments and returning its output.
 
 ### How to use this program
 
