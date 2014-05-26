@@ -2,17 +2,17 @@
 
 Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
-### Working versions
+### How to use this program.
 
- * Full problem set: `xerver_04.py`. Works.
+   Clone the repository and run the server as
 
-   Run as
+        python server.py 1234
 
-        python server_04.py 1234
+   where 1234 is a port to listen on. If no port is found, the default is 1924. Bear in mind that some ports may require special permissions.
 
-   where 1234 is a port to listen on. If no port is found, the default is 1924.
+   The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section "Results tested for", below, for examples.
 
-   Functions corresponding to URLs should be added to `functions.py`. The class will keep track of those functions, and should they occur as the rightmost part of the path in a URL, less the extension .html, they will be called as functions and their return value saved to a file which is then served to the user. For instance, if the user sends a GET request
+   Functions corresponding to URLs should be added to `functions.py` in the section marked with a row of hash-signs. The server will keep track of those functions — assuming they work as written — without having to be restarted. When one of them occurs as the rightmost part of the path in a URL it will be called as a function; its return value will be saved to a file which is then served to the user. For instance, if the user sends a GET request
 
         http://localhost:1234/time.html
 
@@ -24,7 +24,7 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
    adds the integers 1 and 2 and serves the resulting sum, 3.
 
-   To add functions to this framework, open `functions.py` and write functions in the indicated place. Assuming they work as written, they will be added to the server's list of available functions, even while the server is running.
+   Examples of actual functionality appear immediately below.
 
 ### Results tested for
 
