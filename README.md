@@ -1,16 +1,19 @@
 ## Simple Web Framework
 
-Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
+Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY. Construct an HTTP server and add functionality to allow it to implement a simple web framework.
 
-### How to use this program.
+### How to use this program
 
-   Clone the repository and run the server as
+ 1. Clone the repository and run the HTTP server as
 
-    python server.py 1234
+        python server.py 1234
 
-   where 1234 is a port to listen on. Point your browser to `http://localhost:1234` to view the content being served. If no port is found on the command line, the default is 1924. Bear in mind that some ports may require special permissions.
+   where 1234 is a port to listen on. Point your browser to `http://localhost:1234` to view the content being served. If no port is found on the command line, the default is 1924. Bear in mind that some ports may require special permissions. 
 
-   The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section **Results tested for**, below, for examples.
+ 1. This program requires Python3. 
+ 1. There is a requirements file, but at present (20140526) it only loads Ipython, which is not necessary to run the server.
+
+ 1. The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section **Results tested for**, below, for examples.
 
    Functions corresponding to URLs should be added to `functions.py` in the section marked with a row of hash-signs. The server will keep track of those functions — assuming they work as written — without having to be restarted. When one of them occurs as the rightmost part of the path in a URL it will be called as a function; its return value will be saved to a file which is then served to the user. For instance, if the user sends a GET request
 
