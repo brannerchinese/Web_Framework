@@ -15,19 +15,19 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY. Const
 
  1. The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section **Results tested for**, below, for examples.
 
-   Functions corresponding to URLs should be added to `functions.py` in the section marked with a row of hash-signs. The server will keep track of those functions — assuming they work as written — without having to be restarted. When one of them occurs as the rightmost part of the path in a URL it will be called as a function; its return value will be saved to a file which is then served to the user. For instance, if the user sends a GET request
+ 1.  Functions corresponding to URLs should be added to `functions.py` in the section marked with a row of hash-signs. The server will keep track of those functions — assuming they work as written — without having to be restarted. When one of them occurs as the rightmost part of the path in a URL it will be called as a function; its return value will be saved to a file which is then served to the user. For instance, if the user sends a GET request
 
-    http://localhost:1234/time.html
+        http://localhost:1234/time.html
 
    the function `time()` will be run; it returns current Unix time formatted for human readability, and this value is saved to an actual file `time.html` which is then served as the response to the original request.
 
-   If a function has arguments, those arguments appear delimited by slashes. For example,
+ 1.  If a function has arguments, those arguments appear delimited by slashes. For example,
 
-    http://localhost:1234/two_arg/1/2
+        http://localhost:1234/two_arg/1/2
 
    calls a function `two_arg()` which adds the arguments integers 1 and 2 and serves the resulting sum, 3.
 
-   Examples of actual functionality appear immediately below.
+ 1.  Examples of actual functionality appear immediately below.
 
 ### Results tested for
 
