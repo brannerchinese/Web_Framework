@@ -22,49 +22,67 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
     http://localhost:1234/two_arg/1/2
 
-   adds the integers 1 and 2 and serves the resulting sum, 3.
+   calls a function `two_arg()` which adds the arguments integers 1 and 2 and serves the resulting sum, 3.
 
    Examples of actual functionality appear immediately below.
 
 ### Results tested for
 
-    http://localhost:1234/
-    http://localhost:1234/index.html
+ 1. 
+
+        http://localhost:1234/
+        http://localhost:1234/index.html
 
    Returns: The contents of file `index.html`.
 
-    http://localhost:1234/help.html
+ 1. 
+
+        http://localhost:1234/help.html
 
    Returns: The contents of file `help.html`.
 
-    http://localhost:1234/subdir/file.html
+ 1. 
+
+        http://localhost:1234/subdir/file.html
 
    Returns: The contents of file `file.html` in subdirectory `subdir`.
 
-    http://localhost:1234/subdir/
+ 1. 
+
+        http://localhost:1234/subdir/
 
    Returns: Program error message: `Path must end with ".html"; try again.` Assumes a subdirectory was meant but did not find a filename to search for in that subdirectory and did not reveal anything about the content of that subdirectory.
 
-    http://localhost:1234/subdir.html
+ 1. 
+
+        http://localhost:1234/subdir.html
 
    Returns: 404 error; no such file
 
-    http://localhost:1234/time.html
-    http://localhost:1234/hello.html
-    http://localhost:1234/shellfish.html
-    http://localhost:1234/macguffin.html
+ 1. 
+
+        http://localhost:1234/time.html
+        http://localhost:1234/hello.html
+        http://localhost:1234/shellfish.html
+        http://localhost:1234/macguffin.html
 
    Returns: Each of these calls a zero-argument function. Some were added during the running of the server and the server became aware of them.
 
-    http://localhost:1234/one_arg/temperature
+ 1. 
+
+        http://localhost:1234/one_arg/temperature
 
    Returns: Calls a function `one_arg(arg)` naming "temperature" as the argument.
 
-    http://localhost:1234/two_arg/1/2
+ 1. 
+
+        http://localhost:1234/two_arg/1/2
 
    Returns: Calls a function `two_arg(arg1, arg2)` adding the two integer arguments following the function name.
 
-    http://localhost:1234/two_arg/1/2/4
+ 1. 
+
+        http://localhost:1234/two_arg/1/2/4
 
    Returns: Reports exception due to the wrong number of arguments for the function.
 
