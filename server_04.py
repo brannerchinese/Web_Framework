@@ -36,28 +36,26 @@ import functions
 
 class CustomHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        try:
-            self.special
-        except Exception:
-            self.special = ['hello', 'time']
+        """Provide functionality for GET requests."""
         self.send_response(200)
         self.send_header('Content-type', 'text-html')
         self.end_headers()
         self.files = 'files/'
         file_contents = None
         # Special case: no path given.
+        print(self.path)
         if self.path == '/':
             self.path = 'index.html'
         # Special case: path (stripped of .html) is function name.
-        imp.reload(functions)
-        self.zero_arg_urls()
-        # Special case: path (stripped of .html) is function and argument.
-        self.multi_arg_urls()
+        self.url_is_func()
+        print('finished self.url_is_func()')
         # Special case: Not a function, but path is HTML file.
         if self.path.endswith('.html'):
+            print('ends with html')
             try:
                 with open (self.files + self.path, 'rb') as f:
                     file_contents = f.read()
+                    print('got it:', file_contents)
             except IOError:
                 self.send_error(404, 'File {} not found'.format(self.path))
         else:
@@ -66,41 +64,49 @@ class CustomHandler(BaseHTTPRequestHandler):
             # self.wfile is a socket.SocketIO object
             self.wfile.write(file_contents)
 
-    def self.multi_arg_urls(self):
-        """If left-most element of path, less '.html', is a valid function name,
-
-then check functions.Functions; if found there, run it as a function,
-
-with subsequent elements as arguments.
-        """
-        F = functions.Functions()
+    def url_is_func(self):
+        """Treat stripped path-name as possible function call."""
+        # Remove left-most slash.
         path = self.path.lstrip('/')
-        if '/' not in path:
-            return
-        pass
-
-    def zero_arg_urls(self):
-        """If path, less '.html', is a valid function name,
-
-then check functions.Functions; if found there, run it as a function.
-        """
+        # Separate path into its parts.
+        fn_name, *args = path.split('/')
+        print(fn_name, args)
+        if args and '.html' in args[-1]:
+            # It is possible the slash denotes a subdirectory, not a function.
+            sudirectory_possible = True
+        else:
+            sudirectory_possible = False
+        # Check validity of prospective function name.
+        imp.reload(functions)
         F = functions.Functions()
-        fn_name = self.path.lstrip('/').split('/')[0].split('.')[0]
-        if (fn_name[0] in string.ascii_letters and
-                any([i in string.ascii_letters + string.digits + '_' for
-                    i in fn_name]) and
-                fn_name in F.funcs):
-            if F.funcs[fn_name]:
-                # Note that this does not take default arguments into account.
-                content = ('''Function {} takes {} arguments; '''
-                        '''you have supplied none.'''.
-                        format(fn_name, F.funcs[fn_name]))
-            else:
-                content = eval('F.' + fn_name + '()')
-                with open(self.files + fn_name + '.html', 'w') as f:
-                    f.write(content)
+        # If we have html extension on fn_name, remove it.
+        fn_name = fn_name.split('.')[0]
+        print(fn_name)
+        if (fn_name[0] not in string.ascii_letters or
+                any([i not in string.ascii_letters + string.digits + '_' for
+                    i in fn_name]) or
+                fn_name not in F.funcs):
+            print('here')
+            return
+        if not args:
+            # Treat zero-argument case together with the case with arguments.
+            args = ''
+            fn_name = fn_name.split('.')[0]
+        # Call the function on any arguments. Report exception in file.
+        try:
+            content = eval('F.' + fn_name + '(*args)')
+        except Exception as e:
+            if sudirectory_possible:
+                # t was in fact a subdirectory; don't report exception.
+                return
+            content = 'Exception: ' + str(e)
+        # Save to file and ensure that path name is set to that HTML filname.
+        with open(self.files + fn_name + '.html', 'w') as f:
+            f.write(content)
+        self.path = fn_name + '.html'
 
 def run(port):
+    """Run the server indefinitely."""
     print('Server starting on port {}.'.format(port))
     server_address = ('127.0.0.1', port)
     httpd = HTTPServer(server_address, CustomHandler)

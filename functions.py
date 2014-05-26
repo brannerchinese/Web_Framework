@@ -23,7 +23,7 @@ class Functions():
                 self.funcs[item] = len(argspec.args) - 1
 
     #########################
-    # Add new functions here and then add their names to self.special, above.
+    # Add new functions here. They will be automatically added to self.funcs.
     def hello(self):
         return 'Hello world!'
 
@@ -38,6 +38,13 @@ class Functions():
 
     def macguffin(self):
         return 'This is not the MacGuffin you were looking for.'
+
+    def one_arg(self, arg):
+        return 'The argument you supplied was "{}". Am I right?'.format(arg)
+
+    def two_arg(self, a, b):
+        import operator
+        return str(operator.add(int(a), int(b)))
 
     #########################
 
