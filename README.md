@@ -103,6 +103,8 @@
 
 ### Background of this project
 
-This program was written in one day (20140525) as an exercise in the [Iron Forger](https://hackpad.com/Iron-Forger-kEmauANGcV5) series of Hacker School. The submitted code is tagged [`as_submitted`](https://github.com/brannerchinese/web_framework/tree/as_submitted). Interim versions of the program are in the directory `old_versions/`.
+ * This program was written in one day (20140525) as an exercise in the [Iron Forger](https://hackpad.com/Iron-Forger-kEmauANGcV5) series of Hacker School. The submitted code is tagged [`as_submitted`](https://github.com/brannerchinese/web_framework/tree/as_submitted), but more work has been done since then. 
+ * Code review comments are in a directory `code_review_comments/`.
+ * Interim versions of the program are in the directory `old_versions/`.
 
 [end]
