@@ -8,9 +8,9 @@ Assignment at https://hackpad.com/Week-1-Make-a-Web-Framework-qJOpEzlYJZY.
 
         python server.py 1234
 
-   where 1234 is a port to listen on. If no port is found, the default is 1924. Bear in mind that some ports may require special permissions.
+   where 1234 is a port to listen on. Point your browser to `http://localhost:1234` to view the content being served. If no port is found on the command line, the default is 1924. Bear in mind that some ports may require special permissions.
 
-   The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section "Results tested for", below, for examples.
+   The server will serve named HTML files found in the `files` directory, including those in nested subdirectories. See the section **Results tested for**, below, for examples.
 
    Functions corresponding to URLs should be added to `functions.py` in the section marked with a row of hash-signs. The server will keep track of those functions — assuming they work as written — without having to be restarted. When one of them occurs as the rightmost part of the path in a URL it will be called as a function; its return value will be saved to a file which is then served to the user. For instance, if the user sends a GET request
 
