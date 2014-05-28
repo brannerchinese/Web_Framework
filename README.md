@@ -9,7 +9,7 @@
 
 ### How to use this program
 
- 1. Clone the repository and run the HTTP server as
+ 1. Clone the repository, enter directory `web_framework`, and run the HTTP server as
 
         python server.py 1234
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # server.py
 # David Prager Branner
-# 20140526, works.
+# 20140528, works.
 
 """Construct simple web server. See the README for details."""
 
@@ -18,9 +18,6 @@ import functions
 class CustomHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         """Provide functionality for GET requests."""
-        self.send_response(200)
-        self.send_header('Content-type', 'text-html')
-        self.end_headers()
         self.files = 'files/'
         file_contents = None
         # Special case: no path given.
@@ -34,12 +31,22 @@ class CustomHandler(BaseHTTPRequestHandler):
                 with open (self.files + self.path, 'rb') as f:
                     file_contents = f.read()
             except IOError:
-                self.send_error(404, 'File {} not found'.format(self.path))
+                self.send_404()
         else:
-            file_contents = b'Path must end with ".html"; try again.'
+            self.send_404()
+            self.wfile.write(b'Path must end with ".html"; try again.')
         if file_contents:
             # self.wfile is a socket.SocketIO object
+            self.send_200()
             self.wfile.write(file_contents)
+
+    def send_200(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text-html')
+        self.end_headers()
+
+    def send_404(self):
+        self.send_error(404, 'File {} not found'.format(self.path))
 
     def url_is_func(self):
         """Treat stripped path-name as possible function call."""
@@ -83,7 +90,7 @@ def run(port):
     print('Server starting on port {}.'.format(port))
     server_address = ('127.0.0.1', port)
     httpd = HTTPServer(server_address, CustomHandler)
-    print('Server running on port {}.'.format(port))
+    print('Server running on port {}.'.format(httpd.socket.getsockname()[1]))
     httpd.serve_forever()
 
 if __name__ == '__main__':
@@ -94,8 +101,16 @@ if __name__ == '__main__':
         args = parser.parse_args()
     except Exception as e:
         print(e)
-    if args.port:
+    if args.port != None:
         port = args.port
     else:
         port = 1924
-    run(port)
+    if port == 0:
+        print('''\nPort 0 specifies the use of a system-allocated (dynamic) '''
+                '''port and can be used for remote OS detection. We decline '''
+                '''connections on port 0 for that reason.\n''')
+        sys.exit(0)
+    try:
+        run(port)
+    except Exception as e:
+        raise RuntimeError('Unable to listen on port {}.\n{}'.format(port, e))
