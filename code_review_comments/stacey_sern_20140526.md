@@ -1,6 +1,6 @@
 ## Comments by [Stacey Sern](https://github.com/staceysern), 20140526
 
- 1. An exception can occur when the server is being started if an invalid port is provided (> 65536).  After looking at your code, I realized I did the same thing.  My solution was to catch the exception and raise a new one:
+ 1. **Done**. An exception can occur when the server is being started if an invalid port is provided (> 65536).  After looking at your code, I realized I did the same thing.  My solution was to catch the exception and raise a new one:
 
         try:
             serve(self, host=host, port=port)
@@ -8,7 +8,7 @@
             raise RuntimeError("Unable to start server on "
                                "{}:{} ({})".format(host, port, e))
 
- 2. Port 0 seems to be generally acknowledged to mean some random available port and is accepted as such by HTTPServer.  If 0 is entered as the argument for port, it is converted to the default port.  To fix this 'if args.port:' in main should be 'if args.port != None'.  Further, if you make this change, the server will be started on some random port but the program will print that it is running on port 0.  You can get the port number through httpd.socket.getsockname()[1]
+ 2. **Done**. Port 0 seems to be generally acknowledged to mean some random available port and is accepted as such by HTTPServer.  If 0 is entered as the argument for port, it is converted to the default port.  To fix this 'if args.port:' in main should be 'if args.port != None'.  Further, if you make this change, the server will be started on some random port but the program will print that it is running on port 0.  You can get the port number through httpd.socket.getsockname()[1]
 
  3. The following comments are not coding issues, rather design issues for a web framework.
 
