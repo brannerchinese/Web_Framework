@@ -1,14 +1,6 @@
 ## Comments by [Stacey Sern](https://github.com/staceysern), 20140526
 
- 1. **Done**. An exception can occur when the server is being started if an invalid port is provided (> 65536).  After looking at your code, I realized I did the same thing.  My solution was to catch the exception and raise a new one:
-
-        try:
-            serve(self, host=host, port=port)
-        except Exception as e:
-            raise RuntimeError("Unable to start server on "
-                               "{}:{} ({})".format(host, port, e))
-
- 2. **Done**. Port 0 seems to be generally acknowledged to mean some random available port and is accepted as such by HTTPServer.  If 0 is entered as the argument for port, it is converted to the default port.  To fix this 'if args.port:' in main should be 'if args.port != None'.  Further, if you make this change, the server will be started on some random port but the program will print that it is running on port 0.  You can get the port number through httpd.socket.getsockname()[1]
+### To consider for the future
 
  3. The following comments are not coding issues, rather design issues for a web framework.
 
@@ -20,6 +12,18 @@
 
  4. Having dynamic content written to a file and then read from a file also seems inefficient.  File operations can be slow.  Also, the content may be too big to fit in memory.  To address this problem for static files, I used a generator which reads the file in chunks.
 
- 5. The 404 file not found message is being actually being sent as a 200 message.  The problem is that the send_response sequence is being sent  before send_error is called.  Those calls should only be made in the success case.
+### Done
+
+ 1. **Done**. An exception can occur when the server is being started if an invalid port is provided (> 65536).  After looking at your code, I realized I did the same thing.  My solution was to catch the exception and raise a new one:
+
+        try:
+            serve(self, host=host, port=port)
+        except Exception as e:
+            raise RuntimeError("Unable to start server on "
+                               "{}:{} ({})".format(host, port, e))
+
+ 2. **Done**. Port 0 seems to be generally acknowledged to mean some random available port and is accepted as such by HTTPServer.  If 0 is entered as the argument for port, it is converted to the default port.  To fix this 'if args.port:' in main should be 'if args.port != None'.  Further, if you make this change, the server will be started on some random port but the program will print that it is running on port 0.  You can get the port number through httpd.socket.getsockname()[1]
+
+ 5. **Done**. The 404 file not found message is being actually being sent as a 200 message.  The problem is that the send_response sequence is being sent  before send_error is called.  Those calls should only be made in the success case.
 
 [end]
