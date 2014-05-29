@@ -13,7 +13,7 @@
 
         python server.py 1234
 
-   where 1234 is a port to listen on. Point your browser to `http://localhost:1234` to view the content being served. If no port is found on the command line, the default is 1924. Bear in mind that some ports may require special permissions. 
+   where 1234 is a port to listen on. Point your browser to `http://localhost:1234` to view the content being served. If no port is found on the command line, the default is 1924. Bear in mind that some ports may require special permissions. Port 0 is forbidden in this implementation.
 
  1. This program requires Python3. 
  1. There is a requirements file, but at present (20140526) it only loads Ipython, which is not necessary to run the server.
