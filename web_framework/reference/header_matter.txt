@@ -1,0 +1,66 @@
+In [15]: url = 'http://ft.com'
+
+In [16]: code = urllib.request.urlopen(url)
+
+In [18]: code.__dict__
+Out[18]: 
+{'status': 200,
+ 'code': 200,
+ 'reason': 'OK',
+ 'length': None,
+ 'version': 11,
+ 'chunk_left': None,
+ 'msg': 'OK',
+ '_method': 'GET',
+ 'headers': <http.client.HTTPMessage at 0x101dab3c8>,
+ 'url': 'http://www.ft.com/home/uk',
+ 'chunked': True,
+ 'debuglevel': 0,
+ 'will_close': True,
+ 'fp': <_io.BufferedReader name=9>}
+
+In [26]: code.getheaders()
+Out[26]: 
+[('Server', 'Apache/2.2.17 (Unix) mod_jk/1.2.30'),
+ ('Content-Type', 'text/html;charset=utf-8'),
+ ('P3P',
+  'policyref="/w3c/p3p.xml", CP="CAO DSP COR LAW CURa ADMa DEVa TAIa PSAa PSDa CONo OUR DELi BUS IND PHY ONL UNI COM NAV INT DEM PRE OTC"'),
+ ('Environment', 'p'),
+ ('X-FT-ID', '20u'),
+ ('Content-Language', 'en-GB'),
+ ('Last-Modified', 'Thu, 29 May 2014 21:40:14 GMT'),
+ ('Vary', 'Accept-Encoding'),
+ ('Cache-Control', 'max-age=7'),
+ ('Expires', 'Thu, 29 May 2014 21:41:34 GMT'),
+ ('Date', 'Thu, 29 May 2014 21:41:27 GMT'),
+ ('Transfer-Encoding', 'chunked'),
+ ('Connection', 'close'),
+ ('Connection', 'Transfer-Encoding'),
+ ('Set-Cookie',
+  'FT_M=D=D|F=|R=0; expires=Fri, 29-May-2015 21:41:27 GMT; path=/; domain=.ft.com')]
+
+In [27]: code.geturl()
+Out[27]: 'http://www.ft.com/home/uk'
+
+In [30]: a = code.__dict__['headers']
+
+In [33]: list(a.raw_items())
+Out[33]: 
+[('Server', 'Apache/2.2.17 (Unix) mod_jk/1.2.30'),
+ ('Content-Type', 'text/html;charset=utf-8'),
+ ('P3P',
+  'policyref="/w3c/p3p.xml", CP="CAO DSP COR LAW CURa ADMa DEVa TAIa PSAa PSDa CONo OUR DELi BUS IND PHY ONL UNI COM NAV INT DEM PRE OTC"'),
+ ('Environment', 'p'),
+ ('X-FT-ID', '20u'),
+ ('Content-Language', 'en-GB'),
+ ('Last-Modified', 'Thu, 29 May 2014 21:40:14 GMT'),
+ ('Vary', 'Accept-Encoding'),
+ ('Cache-Control', 'max-age=7'),
+ ('Expires', 'Thu, 29 May 2014 21:41:34 GMT'),
+ ('Date', 'Thu, 29 May 2014 21:41:27 GMT'),
+ ('Transfer-Encoding', 'chunked'),
+ ('Connection', 'close'),
+ ('Connection', 'Transfer-Encoding'),
+ ('Set-Cookie',
+  'FT_M=D=D|F=|R=0; expires=Fri, 29-May-2015 21:41:27 GMT; path=/; domain=.ft.com')]
+
